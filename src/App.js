@@ -3,34 +3,45 @@ import useData from "./useData";
 import { useState } from "react";
 import Coin from "./Coin";
 
+function Loading() {
+  return <h1>Loading...</h1>;
+}
+
+function Error() {
+  return (
+    <div>
+      <h1>...Error...</h1>
+      <h3>See console</h3>
+      <h1>...Error...</h1>
+    </div>
+  );
+}
+
 function App() {
-  const [loading, coins, error] = useData();
+  const [loading, response, error] = useData();
 
-  console.log("Type of coins is:", typeof coins);
+  const [search, setSearch] = useState("");
 
-  let result = coins.map(({ foo }) => foo);
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
 
-  // console.log(coins);
-
-  // const handleChange = (e) => {
-  //   setSearch(e.target.value);
-  // };
-
-  // const filteredCoins = coins.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()));
+  const filteredCoins = response.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <h1>hi</h1>
-    // <div className="coin-app">
-    //   <div className="coin-search">
-    //     <h1 className="coin-text">Search a currency</h1>
-    //     <form>
-    //       <input className="coin-input" type="text" onChange={handleChange} placeholder="Search" />
-    //     </form>
-    //   </div>
-    //   {filteredCoins.map((coin) => {
-    //     return <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />;
-    //   })}
-    // </div>
+    <div className="coin-app">
+      <div className="coin-search">
+        <h1 className="coin-text">Search a currency</h1>
+        <form>
+          <input className="coin-input" type="text" onChange={handleChange} placeholder="Search" />
+        </form>
+      </div>
+      {error ? <Error /> : null}
+      {loading ? <Loading /> : null}
+      {filteredCoins.map((coin) => {
+        return <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />;
+      })}
+    </div>
   );
 }
 
