@@ -32,7 +32,7 @@ export default function useData() {
     },
     {
       loading: false,
-      response: null,
+      response: [],
       error: null,
     }
   );
@@ -40,16 +40,16 @@ export default function useData() {
   useEffect(() => {
     let isCurrent = true;
     dispatch({ type: "LOADING" });
+
     axios
-      .get(APILink)
+      .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false")
       .then((res) => {
         if (isCurrent) {
           dispatch({ type: "RESOLVED", response: res.data });
         }
       })
-      .catch((error) => {
-        dispatch({ type: "ERROR", error });
-      });
+      .catch((error) => dispatch({ type: "ERROR", error }));
+
     return () => {
       isCurrent = false;
     };
