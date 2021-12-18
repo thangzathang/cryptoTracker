@@ -45,6 +45,7 @@ export default function useData() {
       .get(APILink)
       .then((res) => {
         if (isCurrent) {
+          console.log(res.data);
           dispatch({ type: "RESOLVED", response: res.data });
         }
       })
