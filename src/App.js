@@ -61,6 +61,7 @@ function App() {
   const currentPosts = filteredCoins.slice(indexOfFirstPost, indexOfLastPost);
 
   console.log(currentPosts);
+  console.log("Length is", currentPosts.length);
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
@@ -88,8 +89,9 @@ function App() {
       </div>
       {error ? <Error /> : null}
       {loading ? <Loading /> : null}
+      <Pagination postsPerPage={postsPerPage} totalPosts={filteredCoins.length} paginate={paginate} />
       {filterBy === "name" &&
-        filteredCoins.map((coin) => {
+        currentPosts.map((coin) => {
           return (
             <>
               <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />
