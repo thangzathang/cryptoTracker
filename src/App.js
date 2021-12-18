@@ -1,14 +1,10 @@
 import "./App.css";
 import useData from "./useData";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Coin from "./Coin";
 
 // Material UI
 import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 
 function Loading() {
   return <h1>Loading...</h1>;
@@ -25,26 +21,36 @@ function Error() {
 }
 
 function App() {
+  // Fun useRef hook
+  const inputBox = useRef(null);
+
   // Custom Hook to make external API Calls
   const [loading, response, error] = useData();
 
-  // console.log(response);
-
+  // Filter by Name or by Symbol?
   const [filterBy, setFilterBy] = useState("name");
 
-  const [search, setSearch] = useState();
+  // State for the search term
+  const [search, setSearch] = useState("");
 
+  // handleChange for every word/ keystroke entered
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
+  // handleChange for changing what we are filtering by.
   const handleFilterChange = (e) => {
     setFilterBy(e.target.value);
+    inputBox.current.focus();
   };
 
   const filteredCoins = response.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()));
-  // const filterBySymbolCoins = response.filter((coin) => coin.symbol.toLowerCase().includes(search.toLowerCase()));
-  // console.log(filteredCoins);
+  const filterBySymbolCoins = response.filter((coin) => coin.symbol.toLowerCase().includes(search.toLowerCase()));
+
+  // Automatically focus on the text input field.
+  useEffect(() => {
+    inputBox.current.focus();
+  }, []);
 
   return (
     <div className="coin-app">
@@ -52,20 +58,26 @@ function App() {
         <h1 className="coin-text">
           Crypto <i>Tracker</i>
         </h1>
-        {/* <Radio checked={filterBy === "name"} onChange={handleFilterChange} value="name" name="radio-buttons" />
-        <Radio checked={filterBy === "symbol"} onChange={handleFilterChange} value="symbol" name="radio-buttons" /> */}
         <form>
-          <input className="coin-input" type="text" onChange={handleChange} placeholder="Search" />
+          <div className="radio-field">
+            Name
+            <Radio color="secondary" checked={filterBy === "name"} onChange={handleFilterChange} value="name" />
+            Symbol
+            <Radio color="secondary" checked={filterBy === "symbol"} onChange={handleFilterChange} value="symbol" />
+          </div>
+          <input ref={inputBox} className="coin-input" type="text" onChange={handleChange} placeholder="Search" />
         </form>
       </div>
       {error ? <Error /> : null}
-      {loading ? (
-        <Loading />
-      ) : (
+      {loading ? <Loading /> : null}
+      {filterBy === "name" &&
         filteredCoins.map((coin) => {
           return <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />;
-        })
-      )}
+        })}
+      {filterBy === "symbol" &&
+        filterBySymbolCoins.map((coin) => {
+          return <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />;
+        })}
     </div>
   );
 }
