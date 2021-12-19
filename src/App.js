@@ -70,13 +70,13 @@ function App() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredCoins.slice(indexOfFirstPost, indexOfLastPost);
 
-  console.log(currentPosts);
+  console.log("Current Posts", currentPosts);
   // console.log("Length is", currentPosts.length);
 
   // Automatically focus on the text input field.
   useEffect(() => {
     inputBox.current.focus();
-  }, []);
+  }, [currentPage]);
 
   return (
     <div className="coin-app">
