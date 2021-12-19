@@ -1,7 +1,7 @@
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 
-// let APILink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${pageNum}&sparkline=false`;
+let APILink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false`;
 
 /*
   Product Requirement 4:
@@ -10,7 +10,7 @@ import axios from "axios";
   Product Requirement 5:
   Provide an error state if the call fails
 */
-export default function useData(pageNum = 1) {
+export default function useData() {
   let [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
@@ -49,7 +49,7 @@ export default function useData(pageNum = 1) {
     dispatch({ type: "LOADING" });
 
     axios
-      .get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=${pageNum}&sparkline=false`)
+      .get(APILink)
       .then((res) => {
         if (isCurrent) {
           console.log(res.data);
@@ -61,7 +61,7 @@ export default function useData(pageNum = 1) {
     return () => {
       isCurrent = false;
     };
-  }, [pageNum]);
+  }, []);
 
   return [state.loading, state.response, state.error];
 }

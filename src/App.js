@@ -38,7 +38,7 @@ function App() {
   const [postsPerPage] = useState(10);
 
   // Custom Hook to make external API Calls
-  const [loading, response, error] = useData(currentPage);
+  const [loading, response, error] = useData();
 
   // State for Filter by Name or by Symbol?
   const [filterBy, setFilterBy] = useState("name");
