@@ -53,7 +53,7 @@ export default function useData(pageNum = 1) {
     return () => {
       isCurrent = false;
     };
-  }, []);
+  }, [pageNum]);
 
   return [state.loading, state.response, state.error];
 }
