@@ -78,7 +78,7 @@ function App() {
   // Automatically focus on the text input field.
   useEffect(() => {
     inputBox.current.focus();
-  }, [currentPage]);
+  }, []);
 
   return (
     <div className="coin-app">
