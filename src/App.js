@@ -9,10 +9,12 @@ import Pagination from "./Pagination";
 // Material UI
 import Radio from "@mui/material/Radio";
 
+// Loading component if component is loading.
 function Loading() {
   return <h1>Loading...</h1>;
 }
 
+// Error component if there is an error
 function Error() {
   return (
     <div>
@@ -21,6 +23,11 @@ function Error() {
     </div>
   );
 }
+
+/*
+  Product Requirement 1:
+  Display a paginated list of Cryptocurrencies
+*/
 
 function App() {
   // Fun useRef hook
@@ -38,9 +45,6 @@ function App() {
 
   // State for the search term
   const [search, setSearch] = useState("");
-
-  // FilteredCoins State
-  // const [filteredCoinArr, setFilteredCoinsArr] = useState();
 
   // handleChange for every word/ keystroke entered
   const handleChange = (e) => {
@@ -61,7 +65,6 @@ function App() {
   }
 
   // Pagination Code
-
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -71,7 +74,6 @@ function App() {
   const currentPosts = filteredCoins.slice(indexOfFirstPost, indexOfLastPost);
 
   console.log("Current Posts", currentPosts);
-  // console.log("Length is", currentPosts.length);
 
   // Automatically focus on the text input field.
   useEffect(() => {

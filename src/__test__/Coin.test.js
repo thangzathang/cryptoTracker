@@ -3,6 +3,13 @@ import { render, screen, cleanup } from "@testing-library/react";
 import Coin from "../Coin";
 import btcData from "./btcData";
 
+// Product Requirement 5:
+// Provide an error state if the call fails
+
+afterEach(() => {
+  cleanup();
+});
+
 test("Should render Coin Component", () => {
   const { name, price, symbol, marketcap, volume, image } = btcData;
   render(<Coin name={name} price={price} symbol={symbol} marketcap={marketcap} volume={volume} image={image} />);

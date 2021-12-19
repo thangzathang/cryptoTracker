@@ -1,6 +1,12 @@
 import React from "react";
 import "./Coin.css";
 
+/*
+Product Requirement 2:
+For the Visible Cryptocurrencies, provide further information in any form you find
+appropriate
+*/
+
 const Coin = ({ id, name, price, symbol, marketcap, volume, image, priceChange }) => {
   return (
     <div className="coin-container" data-testid={`test-${id}`}>
