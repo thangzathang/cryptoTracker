@@ -26,14 +26,21 @@ function App() {
   // Fun useRef hook
   const inputBox = useRef(null);
 
-  // Custom Hook to make external API Calls
-  const [loading, response, error] = useData();
+  // Pagination States
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
 
-  // Filter by Name or by Symbol?
+  // Custom Hook to make external API Calls
+  const [loading, response, error] = useData(currentPage);
+
+  // State for Filter by Name or by Symbol?
   const [filterBy, setFilterBy] = useState("name");
 
   // State for the search term
   const [search, setSearch] = useState("");
+
+  // FilteredCoins State
+  // const [filteredCoinArr, setFilteredCoinsArr] = useState();
 
   // handleChange for every word/ keystroke entered
   const handleChange = (e) => {
@@ -43,28 +50,28 @@ function App() {
   // handleChange for changing what we are filtering by.
   const handleFilterChange = (e) => {
     setFilterBy(e.target.value);
-    inputBox.current.focus();
   };
 
   // The filtered Results
-  const filteredCoins = response.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()));
-  const filterBySymbolCoins = response.filter((coin) => coin.symbol.toLowerCase().includes(search.toLowerCase()));
-
-  // Pagination States
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(10);
+  let filteredCoins;
+  if (filterBy === "name") {
+    filteredCoins = response.filter((coin) => coin.name.toLowerCase().includes(search.toLowerCase()));
+  } else {
+    filteredCoins = response.filter((coin) => coin.symbol.toLowerCase().includes(search.toLowerCase()));
+  }
 
   // Pagination Code
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   // Get current posts
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredCoins.slice(indexOfFirstPost, indexOfLastPost);
 
   console.log(currentPosts);
-  console.log("Length is", currentPosts.length);
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // console.log("Length is", currentPosts.length);
 
   // Automatically focus on the text input field.
   useEffect(() => {
@@ -90,23 +97,13 @@ function App() {
       {error ? <Error /> : null}
       {loading ? <Loading /> : null}
       <Pagination postsPerPage={postsPerPage} totalPosts={filteredCoins.length} paginate={paginate} />
-      {filterBy === "name" &&
-        currentPosts.map((coin) => {
-          return (
-            <>
-              <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />
-            </>
-          );
-        })}
-      {/* {filterBy === "symbol" &&
-        filterBySymbolCoins.map((coin) => {
-          return (
-            <>
-              <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />
-            </>
-          );
-        })} */}
-      <Pagination postsPerPage={postsPerPage} totalPosts={filteredCoins.length} paginate={paginate} />
+      {currentPosts.map((coin) => {
+        return (
+          <>
+            <Coin key={coin.id} name={coin.name} price={coin.current_price} symbol={coin.symbol} marketcap={coin.total_volume} volume={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} />
+          </>
+        );
+      })}
     </div>
   );
 }
