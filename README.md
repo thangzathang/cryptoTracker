@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+# Crypto Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Frontend Developer Coding Challenge
 
-## Available Scripts
+### Context
 
-In the project directory, you can run:
+Cryptocurrency is an ever evolving space with new projects being created every day.
+Our Traders need to be able to see the trending cryptocurrency projects and related
+information.
 
-### `npm start`
+### API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Coingecko provides lots of endpoints for further information you can use for free. I will be using this api to get the data.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## <br />
 
-### `npm test`
+## Once cloned, run:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```
+yarn install
+```
 
-### `npm run build`
+Then start local server with
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+yarn start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## <br />
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+# Preview
 
-### `npm run eject`
+## The Landing Page
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![Cryto Tracker Home](./preview/home.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Search Crypto using name or symbol
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Cryto Tracker Search](./preview/search.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## <br >
 
-## Learn More
+# The Product requirements
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### The dot points are where you will find where the requirements were attempted/ met. All of these component are in the /src file.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. Display a paginated list of Cryptocurrencies
+   - App.js
+1. For the Visible Cryptocurrencies, provide further information in any form you find appropriate for this project.
+   - Coin.js
+1. Be able to filter the list by Cryptocurrency name / symbol
+   - App.js
+1. Provide a loading state whilst data is being pulled
+   - useData.js
+1. Provide an error state if the call fails
+   - useData.js
+1. Provide a unit test for the component
+   - test/Coin.test/js
