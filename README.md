@@ -45,7 +45,7 @@ yarn start
 ### The dot points are where you will find where the requirements were attempted/ met. All of these component are in the /src file.
 
 1. Display a paginated list of Cryptocurrencies
-   - App.js
+   - App.js + Pagination.js
 1. For the Visible Cryptocurrencies, provide further information in any form you find appropriate for this project.
    - Coin.js
 1. Be able to filter the list by Cryptocurrency name / symbol
