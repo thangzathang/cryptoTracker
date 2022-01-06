@@ -14,25 +14,13 @@ Coingecko provides lots of endpoints for further information you can use for fre
 
 ## <br />
 
-## Once cloned, run:
-
-```
-yarn install
-```
-
-Then start local server with
-
-```
-yarn start
-```
-
-## <br />
-
 # Preview
 
 ## The Landing Page
 
 ![Cryto Tracker Home](./preview/home.png)
+
+## <br >
 
 ## Search Crypto using name or symbol
 
