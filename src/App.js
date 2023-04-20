@@ -40,6 +40,8 @@ function App() {
   // Custom Hook to make external API Calls
   const [loading, response, error] = useData();
 
+  // Get Data
+
   // State for Filter by Name or by Symbol?
   const [filterBy, setFilterBy] = useState("name");
 

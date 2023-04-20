@@ -49,5 +49,9 @@
     "babel-core": "^7.0.0-0",
     "babel-jest": "^27.4.5",
     "jest": "^27.4.5"
-  }
+  },
+  "description": "## Frontend Developer Coding Challenge",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }
