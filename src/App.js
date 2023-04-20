@@ -2,6 +2,9 @@ import "./App.css";
 import useData from "./useData";
 import { useState, useRef, useEffect } from "react";
 
+// Import TanStack
+import { useQuery } from "@tanstack/react-query";
+
 // Import Components
 import Coin from "./Coin";
 import Pagination from "./Pagination";
@@ -39,8 +42,19 @@ function App() {
 
   // Custom Hook to make external API Calls
   const [loading, response, error] = useData();
+  console.log("response:", response);
 
   // Get Data
+  // let APILink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=150&page=1&sparkline=false`;
+  // const {
+  //   isLoading,
+  //   error: err,
+  //   data,
+  // } = useQuery({
+  //   queryKey: ["coins"],
+  //   queryFn: () => fetch(APILink).then((res) => res.json()),
+  // });
+  // console.log("useQuery list:", data);
 
   // State for Filter by Name or by Symbol?
   const [filterBy, setFilterBy] = useState("name");
@@ -75,7 +89,7 @@ function App() {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredCoins.slice(indexOfFirstPost, indexOfLastPost);
 
-  console.log("Current Posts", currentPosts);
+  // console.log("Current Posts", currentPosts);
 
   // Automatically focus on the text input field.
   useEffect(() => {

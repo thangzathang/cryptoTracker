@@ -2,7 +2,7 @@ import { useEffect, useReducer } from "react";
 import axios from "axios";
 
 let APILink = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=150&page=1&sparkline=false`;
-
+let APILink2 = `https://jsonplaceholder.typicode.com/posts`;
 /*
   Product Requirement 4:
   Provide a loading state whilst data is being pulled
@@ -49,10 +49,9 @@ export default function useData() {
     dispatch({ type: "LOADING" });
 
     axios
-      .get(APILink)
+      .get(APILink2)
       .then((res) => {
         if (isCurrent) {
-          console.log(res.data);
           dispatch({ type: "RESOLVED", response: res.data });
         }
       })
