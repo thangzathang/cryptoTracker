@@ -16,6 +16,10 @@ Coingecko provides lots of endpoints for further information you can use for fre
 
 # Preview
 
+## UI
+
+Copied CSS and HTML from a Youtuber.
+
 ## The Landing Page
 
 ![Cryto Tracker Home](./preview/home.png)
